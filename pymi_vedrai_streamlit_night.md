@@ -26,11 +26,11 @@ He mistakenly believes that knowing a bit of streamlit makes him a frontend deve
 **title**: Ship MVPs fast with Streamlit
 
 ##### description
+Is there any chance today to build web apps if you only know Python?
+We will see some real-case examples of how we can use Streamlit to build MVP products for end users.
 
-When you are not a frontend developer and you want to build end user products you are in a pickle.
-But if you are a Pythonista there are never limits...
-I have started replicating tools I use and then ...
-One of my apps became app of the month in Streamlit and I am working on the next one!
+##### bio
+By day, Fabio is a Python Software Engineer at Jobtome in Switzerland, specializing in building pipelines, APIs, and Machine Learning models; by night, he dives into exciting side projects, exploring the potentials of Streamlit and Machine Learning in various areas, from music to real estate.
 
 - pushing streamlit to its limits
 - e.g. replicate pomodoro timer (try to use components)
