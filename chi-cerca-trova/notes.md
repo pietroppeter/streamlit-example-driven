@@ -148,7 +148,7 @@ in the demo we have covered
 ## later
 
 - mention chart and data
-  - stats of coprpora!
+  - stats of corpus!
 - cache!!!
 - state management (session_state)
 - more layout (columns!)
