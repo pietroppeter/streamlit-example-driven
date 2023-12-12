@@ -4,7 +4,7 @@ import eliza
 eliza = eliza.Eliza()
 eliza.load('doctor.txt')
 
-st.title(":robot_face: :balloon: E:red[lit]za")
+st.title(":robot_face: :balloon: E:orange[lit]za")
 st.markdown("[Eliza](https://github.com/wadetb/eliza) with streamlit")
 
 if "messages" not in st.session_state:
