@@ -14,7 +14,7 @@ class Chunk:
 
 
 @dataclass
-class Corpus:
+class Document:
     title: str = ""
     author: str = ""
     chunks: list[Chunk] = field(default_factory=list)
@@ -27,8 +27,8 @@ def read_file(filename: str) -> str:
         return f.read()
 
 
-def load_commedia() -> Corpus:
-    """Load Corpus of Divina Commedia"""
+def load_commedia() -> Document:
+    """Load Divina Commedia `Document`"""
     def is_empty(line):
         return line.strip() == ""
     
@@ -36,7 +36,7 @@ def load_commedia() -> Corpus:
         return i > 1 and len(lines) > i + 2 and is_empty(lines[i + 1]) and is_empty(lines[i + 2]) and is_empty(lines[i - 1]) and is_empty(lines[i - 2])
 
     text = read_file("commedia.txt")
-    result = Corpus(title="Divina Commedia", author="Dante Alighieri")
+    result = Document(title="Divina Commedia", author="Dante Alighieri")
     lines = text.splitlines()
     chunk_lines = []
     section = ""
@@ -67,8 +67,8 @@ def load_commedia() -> Corpus:
 
 
 
-def load_orlando() -> Corpus:
-    """Load Corpus of Orlando Furioso"""
+def load_orlando() -> Document:
+    """Load Orlando Furioso `Document`"""
     def is_empty(line):
         return line.strip() == ""
     
@@ -76,7 +76,7 @@ def load_orlando() -> Corpus:
         return (len(lines) > i + 3 and is_empty(lines[i + 1]) and is_empty(lines[i + 2]) and not(is_empty(lines[i + 3]))) or (len(line) <=3)
 
     text = read_file("orlando.txt")
-    result = Corpus(title="Orlando Furioso", author="Ludovico Ariosto")
+    result = Document(title="Orlando Furioso", author="Ludovico Ariosto")
     lines = text.splitlines()
     chunk_lines = []
     section = ""
@@ -105,6 +105,15 @@ def load_orlando() -> Corpus:
         else:
             chunk_lines.append(line)
     
+    return result
+
+
+def load_corpus() -> dict[str, Document]:
+    """Load a small corpus of Italian literature documents"""
+    result = {}
+    for doc_load in [load_commedia, load_orlando]:
+        doc = doc_load()
+        result[doc.title] = doc
     return result
 
 

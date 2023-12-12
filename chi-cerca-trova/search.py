@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from data import Corpus, Chunk
+from data import Document, Chunk
 
 
 @dataclass
@@ -15,7 +15,7 @@ class Match:
     occurrences: list[Occurrence] = field(default_factory=list)
 
 
-def match(corpus: Corpus, pattern: str, case_sensitive=True, max_chunks=-1) -> list[Match]:
+def match(corpus: Document, pattern: str, case_sensitive=True, max_chunks=-1) -> list[Match]:
     """Matches a corpus with a pattern and returns a list of `Match` objects"""
     result = []
     num_chunks = 0
