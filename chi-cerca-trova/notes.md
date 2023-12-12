@@ -1,6 +1,6 @@
 ## demo script
 
-### step 0
+### step 0 - workflow
 
 start with minimal app
 
@@ -15,7 +15,7 @@ st.title("Chi cerca trova")
 - change again text
 - turn on auto rerun
 
-### step 1
+### step 1 - discovery
 
 discovery of data module
 
@@ -27,7 +27,7 @@ discovery of data module
 
 discovery of search module...
 
-### step 2
+### step 2 - mvp
 
 build basic search
 
@@ -57,11 +57,23 @@ if query:
     st.warning(f"No matches found")
 ```
 
-### steps 4+
+### step 3 - more widgets
 
-- possibility to add more context
-- possibility to search a different corpus (selectbox or multiselect?)
-- beautify search (colors? context?)
+more corpora:
+- selectbox
+
+more options:
+- control max matches (number_input)
+- control case sensitivity (checkbox)
+
+- multiselect?
+
+### step 4 - beautify
+
+improve layout/formatting:
+
+- expander
+- match colors?
 
 ### summary
 
@@ -84,6 +96,7 @@ in the demo we have covered
 ## later
 
 - mention chart and data
+  - stats of coprpora!
 - cache!!!
 - state management (session_state)
 - more layout (columns!)
