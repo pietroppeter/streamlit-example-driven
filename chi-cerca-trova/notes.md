@@ -27,6 +27,9 @@ discovery of data module
 
 discovery of search module...
 
+use also for streamlit commands!
+- e.g. st.title, st.markdown, st.selectbox, ...
+
 ### step 2 - mvp
 
 build basic search
@@ -37,17 +40,15 @@ import data
 import search
 
 st.title("Chi cerca trova")
-st.subheader("_(kee chair-kah truh-vah)_")
 st.markdown("""
 Information retrieval system for search in Italian literature corpora.
 """)
-commedia = data.load_commedia()
-st.markdown(f"Current corpus is {commedia.title}")
-#search.match
+corpus = data.load_commedia()
+st.markdown(f"Current corpus is {corpus.title}")
 
 query = st.text_input("Search query")
 if query:
-  matches = search.match(commedia, query)
+  matches = search.match(corpus, query)
   if matches:
     st.success(f"Found {len(matches)} matches")
     for match in matches:
@@ -59,14 +60,10 @@ if query:
 
 ### step 3 - more widgets
 
-more corpora:
-- selectbox
-
-more options:
-- control max matches (number_input)
 - control case sensitivity (checkbox)
-
-- multiselect?
+- control show max matches (number_input)
+  - pagination: skip and leave as exercise for the reader
+- more corpora: selectbox first, then multiselect (separated by )
 
 ### step 4 - beautify
 
@@ -74,6 +71,7 @@ improve layout/formatting:
 
 - expander
 - match colors?
+- emoji! (and subheader)
 
 ### summary
 
@@ -86,10 +84,11 @@ in the demo we have covered
   - magic
 - input elements:
   - st.text_input
+  - st.checkbox
   - st.number_input
   - st.selectbox
-  - st.checkbox
-- layout elements:
+  - st.multiselect
+- simple layout elements:
   - st.sidebar
   - st.expander
 
