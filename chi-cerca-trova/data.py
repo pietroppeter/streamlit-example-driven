@@ -1,4 +1,7 @@
-"""Module to load corpora for information retrieval"""
+"""Module to load corpora for information retrieval
+
+Run python data.py to run tests
+"""
 from dataclasses import dataclass, field
 
 
@@ -66,8 +69,15 @@ if __name__ == "__main__":
     assert commedia.title.lower().startswith("divina")
     assert commedia.author.lower().startswith("dante")
     assert len(commedia.chunks) > 10
+    sections = set()
     for chunk in commedia.chunks:
         assert len(chunk.section) > 0
         assert len(chunk.subsection) > 0
         assert len(chunk.lines) > 0
-    print(len(commedia.chunks))
+        sections.add(chunk.section)
+    print(f"{len(commedia.chunks)=}")
+    print(f"{sections=}")
+    for section in sections:
+        n_chunks = len([c for c in commedia.chunks if c.section == section])
+        n_subsections = len({c.subsection for c in commedia.chunks})
+        print(f"{section}: {n_subsections=}, {n_chunks=}")
