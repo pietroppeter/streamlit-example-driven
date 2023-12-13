@@ -20,26 +20,24 @@ add link to <a target="_blank" href="https://revealjs.com/">slides</a>
 
 def app():
   with st.sidebar:
-      st.header("Component Parameters")
-      theme = st.selectbox("Theme", ["black", "black-contrast", "blood", "dracula", "moon", "white", "white-contrast", "league", "beige", "sky", "night", "serif", "simple", "solarized"])
+      theme_default = "dracula"
+      theme_options = ["black", "black-contrast", "blood", "dracula", "moon", "white", "white-contrast", "league", "beige", "sky", "night", "serif", "simple", "solarized"]
+      theme = st.selectbox("Theme", theme_options, index=theme_options.index(theme_default))
+
+      transition = st.selectbox("Transition", ["slide", "convex", "concave", "zoom", "none"])
+  
       height = st.number_input("Height", value=500)
-      st.subheader("Slide Configuration")
       content_height = st.number_input("Content Height", value=900)
       content_width = st.number_input("Content Width", value=900)
       scale_range = st.slider("Scale Range", min_value=0.0, max_value=5.0, value=[0.1, 3.0], step=0.1)
       margin = st.slider("Margin", min_value=0.0, max_value=0.8, value=0.1, step=0.05)
-      transition = st.selectbox("Transition", ["slide", "convex", "concave", "zoom", "none"])
-      plugins = st.multiselect("Plugins", ["highlight", "katex", "mathjax2", "mathjax3", "notes", "search", "zoom"], [])
-      st.subheader("Initial State")
-      hslidePos = st.number_input("Horizontal Slide Position", value=0)
-      vslidePos = st.number_input("Vertical Slide Position", value=0)
-      fragPos = st.number_input("Fragment Position", value=-1)
-      overview = st.checkbox("Show Overview", value=False)
-      paused = st.checkbox("Pause", value=False)
+      # plugins = st.multiselect("Plugins", ["highlight", "katex", "mathjax2", "mathjax3", "notes", "search", "zoom"], [])
+  
+  plugins = ["highlight", "katex"]
 
   currState = rs.slides(slides_markdown, 
                       height=height, 
-                      theme="dracula", 
+                      theme=theme, 
                       config={
                               "transition": transition,
                               "width": content_width, 
@@ -50,13 +48,6 @@ def app():
                               "margin": margin, 
                               "plugins": plugins
                               }, 
-                      initial_state={
-                                      "indexh": hslidePos, 
-                                      "indexv": vslidePos, 
-                                      "indexf": fragPos, 
-                                      "paused": paused, 
-                                      "overview": overview 
-                                      }, 
                       markdown_props={"data-separator-vertical":"^--$"}, 
                       key="foo")
 
