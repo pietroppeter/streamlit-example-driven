@@ -9,12 +9,13 @@ def load_eliza():
 
 def app():
     eliza = load_eliza()
-    st.title(":robot_face: :balloon: E:orange[lit]za")
+    st.title(":robot_face: E:orange[lit]ZA")
     st.markdown("[ELIZA](https://github.com/wadetb/eliza) with streamlit")
     # todo: add more info about ELIZA, see https://en.wikipedia.org/wiki/ELIZA
 
     if "messages" not in st.session_state:
         st.session_state.messages = []
+    if not st.session_state.messages:
         st.session_state.messages.append({"role": "assistant", "content": eliza.initial()})
 
     if "stopped" not in st.session_state:
