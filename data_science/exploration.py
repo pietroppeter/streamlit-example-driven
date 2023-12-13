@@ -23,11 +23,13 @@ def app():
             ],
         )
     else:
-        uploaded_file = st.file_uploader("Upload a data file", accept_multiple_files=False, type=["csv"])
+        uploaded_file = st.file_uploader(
+            "Upload a data file", accept_multiple_files=False, type=["csv"]
+        )
         if not uploaded_file:
             st.stop()
         else:
-            pass # todo implement processing
+            pass  # todo implement processing
 
     if which_data == "Random":
         df = pd.DataFrame(

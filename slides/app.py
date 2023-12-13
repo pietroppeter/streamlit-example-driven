@@ -2,7 +2,9 @@ import streamlit as st
 import reveal_slides as rs
 
 
-st.set_page_config(page_title="Streamlit slides", page_icon="🎈", initial_sidebar_state="collapsed")
+st.set_page_config(
+    page_title="Streamlit slides", page_icon="🎈", initial_sidebar_state="collapsed"
+)
 
 
 def fragment(i: int) -> str:
@@ -335,13 +337,21 @@ slides_thanks = """"
 """
 ih_thanks = i_last + 1
 
-slides_markdown = slides_intro + slides_demo + slides_data + slides_eliza + slides_reveal + slides_thanks
+slides_markdown = (
+    slides_intro
+    + slides_demo
+    + slides_data
+    + slides_eliza
+    + slides_reveal
+    + slides_thanks
+)
 
 
 # change this while developing to start in the appropriate place
 indexh = 0
 indexv = 0
 indexf = 0
+
 
 def app():
     with st.sidebar:
@@ -399,10 +409,10 @@ def app():
             "plugins": plugins,
         },
         initial_state={
-            "indexh": indexh, 
-            "indexv": indexv, 
-            "indexf": indexf, 
-            }, 
+            "indexh": indexh,
+            "indexv": indexv,
+            "indexf": indexf,
+        },
         markdown_props={"data-separator-vertical": "^--$"},
         key="foo",  # what is this about?
     )
@@ -415,14 +425,14 @@ def app():
         st.markdown("Press `F` for full screen, `Esc` to exit full screen.")
     elif currState["indexh"] == i_agenda:
         if currState["indexf"] == i_agenda_fragment_demo:
-            st.markdown("") # todo fragment 1?
+            st.markdown("")  # todo fragment 1?
         elif currState["indexf"] == i_agenda_fragment_science:
-            st.markdown("") # todo fragment 2?
+            st.markdown("")  # todo fragment 2?
     elif currState["indexh"] == i_demo:
         if currState["indexv"] == i_demo_vertical_title:
-            st.markdown("") # todo details of steps
+            st.markdown("")  # todo details of steps
         elif currState["indexv"] == i_demo_vertical_widgets:
-            st.markdown("") # todo link to more widgets
+            st.markdown("")  # todo link to more widgets
 
 
 if __name__ == "__main__":

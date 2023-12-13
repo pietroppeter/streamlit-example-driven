@@ -30,11 +30,13 @@ def app():
         )
         img = load_sample_image(which_img)
     else:
-        uploaded_file = st.file_uploader("Upload an image file", accept_multiple_files=False, type=["png", "jpg"])
+        uploaded_file = st.file_uploader(
+            "Upload an image file", accept_multiple_files=False, type=["png", "jpg"]
+        )
         if not uploaded_file:
             st.stop()
         else:
-            pass # todo implement processing
+            pass  # todo implement processing
 
     # Convert to floats instead of the default 8 bits integer coding. Dividing by
     # 255 is important so that plt.imshow behaves works well on float data (need to

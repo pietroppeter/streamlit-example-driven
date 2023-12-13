@@ -1,1 +1,9 @@
+streamlit
 streamlit-reveal-slides
+numpy
+pandas
+scikit-learn
+scikit-lego
+plotly
+altair
+matplotlib
