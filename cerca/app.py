@@ -13,6 +13,7 @@ def app():
     corpus = load_corpus()
 
     st.title("Chi cerca trova")
+    st.subheader("_(kee chair-kah truh-vah)_")
     st.markdown("Search in a small corpus of Italian literature documents.")
 
     show_max_chunks = st.sidebar.number_input(

@@ -9,11 +9,6 @@ def fragment(i: int) -> str:
 slides_intro = f"""
 # [Streamlit]()
 ## Example-driven learning
-<!--
-slides: <a target="_blank" href="">todo</a>
-
-source: <a target="_blank" href="">todo</a>
--->
 ---
 ## Agenda
 
@@ -25,10 +20,7 @@ source: <a target="_blank" href="">todo</a>
   _chat, state, url parameters_ {fragment(2)}
 - 🎈 **Slides** {fragment(3)}  
   _components, multipage apps_ {fragment(3)}
-<!--
-- 🥷 advanced tips {fragment(4)}
-- 🏰 streamlit history and alternatives {fragment(5)}
--->
+
 ---
 ## demo cerca
 
@@ -37,6 +29,22 @@ todo summary of steps
 todo summary of widgets
 
 -> add action to exit full screen from slides (this is the first time we go out)
+"""
+leftout = """"
+<!--
+slides: <a target="_blank" href="">todo</a>
+
+source: <a target="_blank" href="">todo</a>
+-->
+
+<!--
+
+- 🥷 advanced tips {fragment(4)}
+- 🏰 streamlit history and alternatives {fragment(5)}
+
+-->
+
+
 """
 i_title = 0
 i_agenda = 1
