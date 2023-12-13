@@ -54,6 +54,7 @@ i_last = i_agenda
 slides_demo = """
 ---
 ## 🕵️ **Demo**
+### _widgets, streamlit💡, cache_
 --
 ### widgets
 
@@ -129,6 +130,7 @@ i_last = i_demo
 slides_data = """
 ---
 ## 🧑‍🔬 **Data Science**
+### _data, plots, columns, ..._
 --
 ### data
 ```python
@@ -187,6 +189,7 @@ i_last = ih_data
 slides_eliza = """
 ---
 ## 🧑‍🔬 **ELIZA**
+### _chat, state, url parameters_
 --
 ### chat / state (past messages)
 `st.chat_message` and `st.session_state`
@@ -280,29 +283,64 @@ i_last = ih_eliza
 
 slides_reveal = """
 ---
-## 🧑‍🔬 **Slides** [reveal.js]()
+## 🧑‍🔬 **Slides** [reveal.js](https://revealjs.com/)
+### _components, multipage apps_
 --
-### components
-```
-...
-```
+### components ([gallery]())
+Components are custom widgets which provide:
+- additional visual elements
+- (optional) "events" as result of interaction
 
+```python
+import reveal_slides as rs
+
+slides_markdown = \"\"\"...\"\"\"
+
+currState = rs.slides(sample_markdown, theme=..., ...)
+
+if currState["indexh"] == 0:
+    st.markdown("first slide")
+elif currState["indexh"] == 1:
+    if currState["indexv"] == 1:
+        st.markdown("second slide - second vertical slide")
+elif currState["indexh"] == 2:
+    if currState["indexf"] == 2:
+        st.markdown("third slide - third fragment")
+```
+They can be made with static html/css, react, vue, ...
 --
 ### multipage apps
-```python
-...
+A special folder structure:
 ```
+1_🎈_Slides.py
+pages/
+    2_🕵️_Cerca.py
+    3_🧑‍🔬_Data_Science.py
+    4_🤖_ELIZA.py
+```
+I have only 2 lines in `1_🎈_Slides.py`:
+```python
+from slides.app import app
 
+app()
+```
 """
 ih_reveal = i_last + 1
 i_last = ih_reveal
 
 
-slides_markdown = slides_intro + slides_demo + slides_data + slides_eliza + slides_reveal
+slides_thanks = """"
+---
+# 🙏 **Thank you**
+"""
+ih_thanks = i_last + 1
+
+slides_markdown = slides_intro + slides_demo + slides_data + slides_eliza + slides_reveal + slides_thanks
+
 
 # change this while developing to start in the appropriate place
-indexh = ih_eliza
-indexv = 3
+indexh = 0
+indexv = 0
 indexf = 0
 
 def app():
