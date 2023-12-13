@@ -7,15 +7,17 @@ def fragment(i: int) -> str:
 
 
 slides_intro = f"""
-# [Streamlit]()
+# **Streamlit**
 ## Example-driven learning
+
+[github.com/pietroppeter/streamlit-example-driven](https://github.com/pietroppeter/streamlit-example-driven)
 ---
 ## Agenda
 
 - 🕵️ **Demo** {fragment(0)}  
   _widgets, streamlit💡, cache_ {fragment(0)}
 - 🧑‍🔬 **Data Science** {fragment(1)}  
-  _image, charts, plots, columns_ {fragment(1)}
+  _image, charts, plots, columns, ..._ {fragment(1)}
 - 🤖 **ELIZA** {fragment(2)}  
   _chat, state, url parameters_ {fragment(2)}
 - 🎈 **Slides** {fragment(3)}  
@@ -133,14 +135,14 @@ def app():
         st.markdown("Press `F` for full screen, `Esc` to exit full screen.")
     elif currState["indexh"] == i_agenda:
         if currState["indexf"] == i_agenda_fragment_demo:
-            st.markdown("todo fragment 1")
+            st.markdown("") # todo fragment 1
         elif currState["indexf"] == i_agenda_fragment_science:
-            st.markdown("todo fragment 2")
+            st.markdown("") # todo fragment 2
     elif currState["indexh"] == i_demo:
         if currState["indexv"] == i_demo_vertical_steps:
-            st.markdown("todo details of steps")
+            st.markdown("") # todo details of steps
         elif currState["indexv"] == i_demo_vertical_widgets:
-            st.markdown("todo link to more widgets")
+            st.markdown("") # todo link to more widgets
 
 
 if __name__ == "__main__":
