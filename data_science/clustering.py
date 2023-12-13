@@ -19,15 +19,22 @@ def app():
         "Streamlit port of [scikit-learn example](https://scikit-learn.org/stable/auto_examples/cluster/plot_color_quantization.html) _Color Quantization using K-means_"
     )
 
-    # todo: add file upload as an option!
-    which_img = st.selectbox(
-        "Pick an image",
-        options=[
-            "flower.jpg",
-            "china.jpg",
-        ],
-    )
-    img = load_sample_image(which_img)
+    which_load = st.radio("Load data", ["Sample files", "Upload file"], horizontal=True)
+    if which_load == "Sample files":
+        which_img = st.selectbox(
+            "Pick an image",
+            options=[
+                "flower.jpg",
+                "china.jpg",
+            ],
+        )
+        img = load_sample_image(which_img)
+    else:
+        uploaded_file = st.file_uploader("Upload an image file", accept_multiple_files=False, type=["png", "jpg"])
+        if not uploaded_file:
+            st.stop()
+        else:
+            pass # todo implement processing
 
     # Convert to floats instead of the default 8 bits integer coding. Dividing by
     # 255 is important so that plt.imshow behaves works well on float data (need to

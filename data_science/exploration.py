@@ -11,14 +11,24 @@ title = "📊 Data Exploration"
 
 def app():
     st.title(title)
-    col1, _ = st.columns([1, 3])
-    which_data = col1.selectbox(
-        "Pick a dataset",
-        options=[
-            "Random",
-            "Penguins",
-        ],
-    )
+    which_load = st.radio("Load data", ["Sample files", "Upload file"], horizontal=True)
+
+    if which_load == "Sample files":
+        col1, _ = st.columns([1, 3])
+        which_data = col1.selectbox(
+            "Pick a dataset",
+            options=[
+                "Random",
+                "Penguins",
+            ],
+        )
+    else:
+        uploaded_file = st.file_uploader("Upload a data file", accept_multiple_files=False, type=["csv"])
+        if not uploaded_file:
+            st.stop()
+        else:
+            pass # todo implement processing
+
     if which_data == "Random":
         df = pd.DataFrame(
             {
