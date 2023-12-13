@@ -26,16 +26,8 @@ slides_intro = f"""
 - 🎈 **Slides** {fragment(3)}  
   _components, multipage apps_ {fragment(3)}
 
----
-## demo cerca
-
-todo summary of steps
---
-todo summary of widgets
-
--> add action to exit full screen from slides (this is the first time we go out)
 """
-leftout = """"
+leftout = """
 <!--
 slides: <a target="_blank" href="">todo</a>
 
@@ -48,8 +40,6 @@ source: <a target="_blank" href="">todo</a>
 - 🏰 streamlit history and alternatives {fragment(5)}
 
 -->
-
-
 """
 i_title = 0
 i_agenda = 1
@@ -59,17 +49,88 @@ i_agenda_fragment_eliza = 2
 i_agenda_fragment_slides = 3
 i_agenda_fragment_ninja = 4
 i_agenda_fragment_streamlit = 5
+i_last = i_agenda
 
-i_demo = 2
-i_demo_vertical_steps = 0
-i_demo_vertical_widgets = 1
+slides_demo = """
+---
+## 🕵️ **Demo**
+--
+### widgets
 
-slides_main = r"""
+```python
+def app():
+    ...
 
+    st.title(...)
+    st.markdown(...)
+
+    show_max_chunks = st.sidebar.number_input(...) # ✨
+
+    documents = [ corpus[name]
+        for name in st.multiselect(...)] # ✨
+
+    if len(documents) == 0:
+        st.error(...)
+        st.stop()
+
+    query = st.text_input(...) # ✨
+    case_sensitive = st.checkbox(...) # ✨
+    if query:
+        for document in documents:
+            st.markdown(...)
+
+            matches = search.match(document, query, ...)
+            if matches:
+                st.success(...)
+                show_matches = ...
+                if len(show_matches) < len(matches):
+                    st.warning(...)
+                for match in show_matches:
+                    st.markdown(...)
+            else:
+                st.warning(...)
+    else:
+        st.markdown(...)
+```
+
+--
+### streamlit 💡
+
+First principle of streamlit:
+**Embrace Scripting!**
+
+- every time there is an interaction... ✨
+- _...rerun the whole python script!_ 🤯
+- backend and frontend magic 🧙 makes interactivity smooth!
+--
+### cache
+
+What about _long computations_? **Cache them!**
+
+```python
+@st.cache_data # 🔮
+def load_corpus():
+    corpus = data.load_corpus()
+    return corpus
+
+
+def app():
+    corpus = load_corpus()
+    ...
+```
 """
+i_demo = i_last + 1
+i_demo_vertical_title = 0
+i_demo_vertical_widgets = 1
+i_demo_vertical_idea = 2
+i_demo_vertical_cache = 3
 
-slides_markdown = slides_intro + slides_main
+slides_markdown = slides_intro + slides_demo
 
+# change this while developing to start in the appropriate place
+indexh = 0
+indexv = 0
+indexf = 0
 
 def app():
     with st.sidebar:
@@ -126,6 +187,11 @@ def app():
             "margin": margin,
             "plugins": plugins,
         },
+        initial_state={
+            "indexh": indexh, 
+            "indexv": indexv, 
+            "indexf": indexf, 
+            }, 
         markdown_props={"data-separator-vertical": "^--$"},
         key="foo",  # what is this about?
     )
@@ -138,11 +204,11 @@ def app():
         st.markdown("Press `F` for full screen, `Esc` to exit full screen.")
     elif currState["indexh"] == i_agenda:
         if currState["indexf"] == i_agenda_fragment_demo:
-            st.markdown("") # todo fragment 1
+            st.markdown("") # todo fragment 1?
         elif currState["indexf"] == i_agenda_fragment_science:
-            st.markdown("") # todo fragment 2
+            st.markdown("") # todo fragment 2?
     elif currState["indexh"] == i_demo:
-        if currState["indexv"] == i_demo_vertical_steps:
+        if currState["indexv"] == i_demo_vertical_title:
             st.markdown("") # todo details of steps
         elif currState["indexv"] == i_demo_vertical_widgets:
             st.markdown("") # todo link to more widgets
