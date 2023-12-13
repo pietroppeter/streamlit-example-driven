@@ -20,7 +20,7 @@ slides_intro = f"""
 - 🕵️ **Demo** {fragment(0)}  
   _widgets, streamlit💡, cache_ {fragment(0)}
 - 🧑‍🔬 **Data Science** {fragment(1)}  
-  _image, charts, plots, columns, ..._ {fragment(1)}
+  _data, plots, columns, ..._ {fragment(1)}
 - 🤖 **ELIZA** {fragment(2)}  
   _chat, state, url parameters_ {fragment(2)}
 - 🎈 **Slides** {fragment(3)}  
@@ -124,12 +124,71 @@ i_demo_vertical_title = 0
 i_demo_vertical_widgets = 1
 i_demo_vertical_idea = 2
 i_demo_vertical_cache = 3
+i_last = i_demo
 
-slides_markdown = slides_intro + slides_demo
+slides_data = """
+---
+## 🧑‍🔬 Data Science
+--
+### data
+```python
+def app()
+    ...
+
+    which_load = st.radio("Load data",
+        ["Sample files", "Upload file"], horizontal=True)
+    if which_load == "Sample files":
+        which_img = st.selectbox("Pick an image",
+            options=["flower.jpg", "china.jpg"])
+        img = load_sample_image(which_img)
+    else:
+        uploaded_file = st.file_uploader("Upload an image file", accept_multiple_files=False, type=["png", "jpg"])
+        if not uploaded_file:
+            st.stop()
+        else:
+            ...
+```
+
+--
+### plots (and tabs)
+```python
+tab1, tab2, tab3 = st.tabs(["Builtin (Altair)", ...])
+with tab1:
+    st.scatter_chart(df, x=feat1, y=feat2)
+with tab2:
+    fig = px.scatter(df, x=feat1, y=feat2)
+    st.plotly_chart(fig, use_container_width=True)
+with tab3:
+    fig, ax = plt.subplots()
+    ax.scatter(df[feat1], df[feat2])
+    st.pyplot(fig)
+```
+--
+### columns
+
+```python
+st.write("Pick two features")
+col1, col2, _ = st.columns(3)
+feat1 = col1.selectbox("Feature 1", df.columns)
+feat2 = col2.selectbox("Feature 2", [c for c in df.columns if c != feat1])
+```
+
+or
+
+```python
+        col1, _ = st.columns([1, 3])
+        with col1:
+            which_data = st.selectbox(...)
+```
+"""
+ih_data = i_last + 1
+
+
+slides_markdown = slides_intro + slides_demo + slides_data
 
 # change this while developing to start in the appropriate place
-indexh = 0
-indexv = 0
+indexh = ih_data
+indexv = 2
 indexf = 0
 
 def app():
