@@ -23,7 +23,7 @@ class Document:
 def read_file(filename: str) -> str:
     """Generic utility function to read a text file"""
     # todo: make sure path is relative to this file
-    with open("cerca/" + filename, "r") as f:
+    with open(filename, "r") as f:
         return f.read()
 
 

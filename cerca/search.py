@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from cerca.data import Document, Chunk
+from data import Document, Chunk
 
 
 @dataclass
