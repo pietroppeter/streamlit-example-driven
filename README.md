@@ -14,6 +14,7 @@ but they mostly call a separate app from outside.
 App implementations are in its own specific folders:
 - `slides`: slides for presentation
 - `cerca`: a simple information retrieval system
+- `data_science`: data science use cases (clustering, data exploration)
 - `elitza`: ELIZA chatbot
 
 To run single app (e.g. cerca) first set PYTHONPATH to `.`,

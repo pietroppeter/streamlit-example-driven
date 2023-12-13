@@ -1,11 +1,13 @@
 import streamlit as st
 from elitza.eliza import Eliza
 
+
 @st.cache_data
 def load_eliza():
     eliza = Eliza()
-    eliza.load('elitza/doctor.txt')
+    eliza.load("elitza/doctor.txt")
     return eliza
+
 
 def app():
     eliza = load_eliza()
@@ -16,10 +18,12 @@ def app():
     if "messages" not in st.session_state:
         st.session_state.messages = []
     if not st.session_state.messages:
-        st.session_state.messages.append({"role": "assistant", "content": eliza.initial()})
+        st.session_state.messages.append(
+            {"role": "assistant", "content": eliza.initial()}
+        )
 
     if "stopped" not in st.session_state:
-        st.session_state.stopped = False 
+        st.session_state.stopped = False
 
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):

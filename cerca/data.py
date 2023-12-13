@@ -29,11 +29,19 @@ def read_file(filename: str) -> str:
 
 def load_commedia() -> Document:
     """Load Divina Commedia `Document`"""
+
     def is_empty(line):
         return line.strip() == ""
-    
+
     def is_metadata_line(i, lines):
-        return i > 1 and len(lines) > i + 2 and is_empty(lines[i + 1]) and is_empty(lines[i + 2]) and is_empty(lines[i - 1]) and is_empty(lines[i - 2])
+        return (
+            i > 1
+            and len(lines) > i + 2
+            and is_empty(lines[i + 1])
+            and is_empty(lines[i + 2])
+            and is_empty(lines[i - 1])
+            and is_empty(lines[i - 2])
+        )
 
     text = read_file("commedia.txt")
     result = Document(title="Divina Commedia", author="Dante Alighieri")
@@ -45,35 +53,44 @@ def load_commedia() -> Document:
     for i, line in enumerate(lines):
         if is_empty(line):
             if chunk_lines:
-                chunk = Chunk(section=section, subsection=subsection, lines=chunk_lines, id=i+1)
+                chunk = Chunk(
+                    section=section, subsection=subsection, lines=chunk_lines, id=i + 1
+                )
                 result.chunks.append(chunk)
                 chunk_lines = []
 
         elif is_metadata_line(i, lines):
             if chunk_lines:
-                chunk = Chunk(section=section, subsection=subsection, lines=chunk_lines, id=i+1)
+                chunk = Chunk(
+                    section=section, subsection=subsection, lines=chunk_lines, id=i + 1
+                )
                 result.chunks.append(chunk)
                 section, subsection, chunk_lines = "", "", []
             try:
                 section, subsection = [s.strip() for s in line.split("•")]
             except ValueError:
                 import streamlit as st
+
                 st.write(line)
         else:
             chunk_lines.append(line)
-    
+
     return result
-
-
 
 
 def load_orlando() -> Document:
     """Load Orlando Furioso `Document`"""
+
     def is_empty(line):
         return line.strip() == ""
-    
+
     def is_metadata_line(i, lines, line=None):
-        return (len(lines) > i + 3 and is_empty(lines[i + 1]) and is_empty(lines[i + 2]) and not(is_empty(lines[i + 3]))) or (len(line) <=3)
+        return (
+            len(lines) > i + 3
+            and is_empty(lines[i + 1])
+            and is_empty(lines[i + 2])
+            and not (is_empty(lines[i + 3]))
+        ) or (len(line) <= 3)
 
     text = read_file("orlando.txt")
     result = Document(title="Orlando Furioso", author="Ludovico Ariosto")
@@ -101,10 +118,11 @@ def load_orlando() -> Document:
                     section = line
             except ValueError:
                 import streamlit as st
+
                 st.write(line)
         else:
             chunk_lines.append(line)
-    
+
     return result
 
 

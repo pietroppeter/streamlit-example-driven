@@ -2,14 +2,16 @@ import streamlit as st
 import cerca.data as data
 import cerca.search as search
 
+
 @st.cache_data
 def load_corpus():
     corpus = data.load_corpus()
     return corpus
 
+
 def app():
     corpus = load_corpus()
-    
+
     st.title("Chi cerca trova")
     st.markdown("Search in a small corpus of Italian literature documents.")
 
@@ -25,7 +27,6 @@ def app():
     if len(documents) == 0:
         st.error("Please select at least one document")
         st.stop()
-
 
     query = st.text_input("Search query")
     case_sensitive = st.checkbox("Case sensitive", value=False)

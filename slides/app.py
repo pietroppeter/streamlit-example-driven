@@ -1,8 +1,10 @@
 import streamlit as st
 import reveal_slides as rs
 
+
 def fragment(i: int) -> str:
-    return f"<!-- .element: class=\"fragment\" data-fragment-index=\"{i}\" -->"
+    return f'<!-- .element: class="fragment" data-fragment-index="{i}" -->'
+
 
 slides_intro = f"""
 # [Streamlit]()
@@ -16,15 +18,17 @@ source: <a target="_blank" href="">todo</a>
 ## Agenda
 
 - 🕵️ **Demo** {fragment(0)}  
-  _basic widgets, streamlit flow, cache_ {fragment(0)}
+  _widgets, streamlit💡, cache_ {fragment(0)}
 - 🧑‍🔬 **Data Science** {fragment(1)}  
   _image, charts, plots, columns_ {fragment(1)}
 - 🤖 **ELIZA** {fragment(2)}  
   _chat, state, url parameters_ {fragment(2)}
 - 🎈 **Slides** {fragment(3)}  
   _components, multipage apps_ {fragment(3)}
+<!--
 - 🥷 advanced tips {fragment(4)}
 - 🏰 streamlit history and alternatives {fragment(5)}
+-->
 ---
 ## demo cerca
 
@@ -110,7 +114,7 @@ def app():
             "plugins": plugins,
         },
         markdown_props={"data-separator-vertical": "^--$"},
-        key="foo", # what is this about?
+        key="foo",  # what is this about?
     )
 
     if currState["indexh"] == i_title:
