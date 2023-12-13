@@ -15,7 +15,7 @@ slides_intro = f"""
 
 [github.com/pietroppeter/streamlit-example-driven](https://github.com/pietroppeter/streamlit-example-driven)
 ---
-## Agenda
+## Outline
 
 - 🕵️ **Demo** {fragment(0)}  
   _widgets, streamlit💡, cache_ {fragment(0)}
@@ -128,7 +128,7 @@ i_last = i_demo
 
 slides_data = """
 ---
-## 🧑‍🔬 Data Science
+## 🧑‍🔬 **Data Science**
 --
 ### data
 ```python
@@ -182,13 +182,127 @@ or
 ```
 """
 ih_data = i_last + 1
+i_last = ih_data
+
+slides_eliza = """
+---
+## 🧑‍🔬 **ELIZA**
+--
+### chat / state (past messages)
+`st.chat_message` and `st.session_state`
+
+```python
+eliza = load_eliza()
+...
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+... # initial message
+if not st.session_state.messages:
+    st.session_state.messages.append(
+        {"role": "assistant", "content": eliza.initial()}
+    )
+... # show past messages
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+...
+```
+--
+### chat / state (new messages)
+`st.chat_input` (and `st.session_state`)
+
+```python
+...
+if prompt := st.chat_input("What is up?"):
+    # append my response
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    response = eliza.respond(prompt)
+    if response is None: # final message
+        with st.chat_message("assistant"):
+            st.markdown(eliza.final())
+        ...
+    else: # append next eliza's response
+        st.session_state.messages.append({"role": "assistant", "content": response})
+        with st.chat_message("assistant"):
+            st.markdown(response)
+```
+--
+### state (stopped)
+at the beginning:
+```python
+if "stopped" not in st.session_state:
+    st.session_state.stopped = False
+```
+at the end:
+```python
+if st.session_state.stopped:
+    st.markdown("Conversation with Eliza has ended.")
+    if st.button("Bookmark the conversation as url"):
+        ...
+    if st.button("Restart"):
+        st.session_state.messages = []
+        st.session_state.stopped = False
+        st.rerun()
+    st.stop()
+
+if prompt := st.chat_input("What is up?"):
+    ...
+    response = eliza.respond(prompt)
+    if response is None:
+        ...
+        st.session_state.stopped = True
+        st.rerun()
+```
+--
+### url parameters
+at the beginning:
+```python
+if "encoded_messages" in st.experimental_get_query_params():
+    encoded_messages = st.experimental_get_query_params(
+        )["encoded_messages"][0]
+    st.experimental_set_query_params()
+    st.session_state.messages = decode(encoded_messages)
+```
+towards the end:
+```python
+if st.button("Bookmark the conversation as url"):
+    encoded_messages = encode(st.session_state.messages)
+    st.experimental_set_query_params(
+        encoded_messages=encoded_messages)
+```
+
+"""
+ih_eliza = i_last + 1
+i_last = ih_eliza
+
+slides_reveal = """
+---
+## 🧑‍🔬 **Slides** [reveal.js]()
+--
+### components
+```
+...
+```
+
+--
+### multipage apps
+```python
+...
+```
+
+"""
+ih_reveal = i_last + 1
+i_last = ih_reveal
 
 
-slides_markdown = slides_intro + slides_demo + slides_data
+slides_markdown = slides_intro + slides_demo + slides_data + slides_eliza + slides_reveal
 
 # change this while developing to start in the appropriate place
-indexh = ih_data
-indexv = 2
+indexh = ih_eliza
+indexv = 3
 indexf = 0
 
 def app():
