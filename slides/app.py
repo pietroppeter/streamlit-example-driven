@@ -2,6 +2,9 @@ import streamlit as st
 import reveal_slides as rs
 
 
+st.set_page_config(page_title="Streamlit slides", page_icon="🎈", initial_sidebar_state="collapsed")
+
+
 def fragment(i: int) -> str:
     return f'<!-- .element: class="fragment" data-fragment-index="{i}" -->'
 

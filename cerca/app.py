@@ -10,6 +10,7 @@ def load_corpus():
 
 
 def app():
+    st.set_page_config(page_title="Chi cerca trova", page_icon="🕵️", initial_sidebar_state="collapsed")
     corpus = load_corpus()
 
     st.title("Chi cerca trova")
