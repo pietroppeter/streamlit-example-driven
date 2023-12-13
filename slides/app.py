@@ -7,10 +7,11 @@ def fragment(i: int) -> str:
 slides_intro = f"""
 # [Streamlit]()
 ## Example-driven learning
+<!--
 slides: <a target="_blank" href="">todo</a>
 
 source: <a target="_blank" href="">todo</a>
-
+-->
 ---
 ## Agenda
 
