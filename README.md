@@ -27,3 +27,7 @@ then, from root folder:
 ```
 streamlit run cerca/app.py
 ```
+
+## 📺 Presentations:
+
+- [Python Milano Meetup, December 13th](https://www.youtube.com/live/YHmp9X5Klr8?si=DAZCgqxFfylUb06N&t=406)
